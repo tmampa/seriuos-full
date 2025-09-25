@@ -1,11 +1,14 @@
 import 'dotenv/config';
 import { defineConfig } from 'drizzle-kit';
 
+if (!process.env.DATABASE_URL) {
+  throw new Error("DATABASE_URL environment variable must be set.");
+}
 export default defineConfig({
   out: './drizzle',
   schema: './lib/db/schema.ts',
   dialect: 'postgresql',
   dbCredentials: {
-    url: process.env.DATABASE_URL! || "postgresql://postgres:tvVcaX5ZTGK1T7J6@db.iipryfphspyrukwjbzlx.supabase.co:5432/postgres",
+    url: process.env.DATABASE_URL!,
   },
 });
